@@ -46,6 +46,12 @@
     <script type="text/javascript">
 
       function booksAdd(){
+        // Primeiro verifica se a tag <tbody> existe. Se não, adiciona uma
+        if ($("#bookTable tbody").length == 0){
+          $("#bookTable").append("<tbody></tbody>");
+        }
+
+        // Adiciona um livro na tabela
         $("#bookTable tbody").append(
           "<tr>" +
             "<td>Test-Driven Development - Teste e Design no Mundo Real com .NET</td>" +
