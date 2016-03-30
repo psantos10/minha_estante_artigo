@@ -38,6 +38,36 @@
             </thead>
           </table>
         </div><!--// .col-md-6 -->
+
+        <div class="col-md-6">
+          <div class="panel panel-primary">
+            <div class="panel-heading">Dados do Livro</div>
+            <div class="panel-body">
+              <form>
+                <div class="form-group">
+                  <label for="title">Título</label>
+                  <input type="text" name="title" class="form-control input-lg" placeholder="Título do Livro">
+                </div>
+
+                <div class="form-group">
+                  <label for="author">Autor</label>
+                  <input type="text" name="author" class="form-control input-lg" placeholder="Nome do Autor">
+                </div>
+
+                <div class="form-group">
+                  <label for="publisher">Editora</label>
+                  <input type="text" name="publisher" class="form-control input-lg" placeholder="Editora">
+                </div>
+
+                <div class="form-group">
+                  <button type="button" id="updateButton" onclick="bookUpdate();" class="btn btn-lg btn-primary">
+                    Adicionar Livro
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div><!--// .panel -->
+        </div><!--// .col-md -->
       </div><!--// .row -->
     </div><!--// .container -->
 
