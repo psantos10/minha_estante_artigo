@@ -33,7 +33,7 @@
               <tr>
                 <th>Título do Livro</th>
                 <th>Autor</th>
-                <th>Ano</th>
+                <th>Editora</th>
               </tr>
             </thead>
           </table>
@@ -43,5 +43,18 @@
 
     <script src="js/jquery-2.2.2.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+
+      function booksAdd(){
+        $("#bookTable tbody").append(
+          "<tr>" +
+            "<td>Test-Driven Development - Teste e Design no Mundo Real com .NET</td>" +
+            "<td>Mauricio Aniche</td>" +
+            "<td>Casa do Código</td>" +
+          "</tr>"
+        );
+      }
+
+    </script>
   </body>
 </html>
