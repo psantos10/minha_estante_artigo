@@ -19,7 +19,27 @@
   </head>
   <body>
 
-    <h1>Minha Estante</h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Meus Livros</h2>
+        </div><!--// .col-md-6 -->
+      </div><!--// .row -->
+
+      <div class="row">
+        <div class="col-md-6">
+          <table id="bookTable" class="table table-bordered table-condensed table-striped">
+            <thead>
+              <tr>
+                <th>Título do Livro</th>
+                <th>Autor</th>
+                <th>Ano</th>
+              </tr>
+            </thead>
+          </table>
+        </div><!--// .col-md-6 -->
+      </div><!--// .row -->
+    </div><!--// .container -->
 
     <script src="js/jquery-2.2.2.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
