@@ -76,8 +76,10 @@
     <script src="js/jquery-2.2.2.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
-      // Linha actual que está sendo editada
-      var _row = null;
+      // Próximo ID para adicionar um novo livro
+      var _nextId = 1;
+      // ID do livro que está sendo editado
+      var _activeId = 0;
 
       function formClear(){
         $("#book_title").val("");
@@ -110,7 +112,7 @@
         );
       }
 
-      function bookBuildTableRow(){
+      function bookBuildTableRow(id){
         var row = "<tr>" +
           "<td>" + $("#book_title").val() + "</td>" +
           "<td>" + $("#book_author").val() + "</td>" +
@@ -119,6 +121,7 @@
             "<button type='button' " +
               "onclick='bookDisplay(this);' " +
               "class='btn btn-default'>" +
+              "data-id='" + id + "'>" +
               "<span class='glyphicon glyphicon-edit'></span>" +
             "</button>" +
           "</td>" +
@@ -126,6 +129,7 @@
             "<button type='button' " +
               "onclick='bookDelete(this);' " +
               "class='btn btn-default'>" +
+              "data-id='" + id + "'>" +
               "<span class='glyphicon glyphicon-remove'></span>" +
             "</button>" +
           "</td>" +
