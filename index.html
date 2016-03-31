@@ -155,8 +155,10 @@
       }
 
       function bookDisplay(button_edit){
-        _row = $(button_edit).parents("tr");
+        var row = $(button_edit).parents("tr");
         var cols = _row.children("td");
+
+        _activeId = $($cols[3]).data("id");
 
         $("#book_title").val($(cols[0]).text());
         $("#book_author").val($(cols[1]).text());
@@ -183,7 +185,7 @@
       function bookUpdate(){
         if ($("#book_title").val() != null && $("#book_title").val() != ''){
           if ($("#updateButton").text() == "Actualizar"){
-            bookUpdateInTable();
+            bookUpdateInTable(_activeId);
           } else {
             // Adiciona o Livro na Tabela
             bookAddToTable();
