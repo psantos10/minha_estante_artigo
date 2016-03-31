@@ -74,6 +74,11 @@
     <script src="js/jquery-2.2.2.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
+      function formClear(){
+        $("#book_title").val("");
+        $("#book_author").val("");
+        $("#book_publisher").val("");
+      }
 
       function booksAdd(){
         // Primeiro verifica se a tag <tbody> existe. Se não, adiciona uma
