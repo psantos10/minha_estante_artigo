@@ -129,6 +129,10 @@
         );
       }
 
+      function bookDelete(button_delete){
+        $(button_delete).parents("tr").remove();
+      }
+
       function bookUpdate(){
         if ($("#book_title").val() != null && $("#book_title").val() != ''){
           // Adiciona o Livro na Tabela
