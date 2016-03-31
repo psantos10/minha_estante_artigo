@@ -110,6 +110,30 @@
         );
       }
 
+      function bookBuildTableRow(){
+        var row = "<tr>" +
+          "<td>" + $("#book_title").val() + "</td>" +
+          "<td>" + $("#book_author").val() + "</td>" +
+          "<td>" + $("#book_publisher").val() + "</td>" +
+          "<td>" +
+            "<button type='button' " +
+              "onclick='bookDisplay(this);' " +
+              "class='btn btn-default'>" +
+              "<span class='glyphicon glyphicon-edit'></span>" +
+            "</button>" +
+          "</td>" +
+          "<td>" +
+            "<button type='button' " +
+              "onclick='bookDelete(this);' " +
+              "class='btn btn-default'>" +
+              "<span class='glyphicon glyphicon-remove'></span>" +
+            "</button>" +
+          "</td>" +
+        "</tr>"
+
+        return row;
+      }
+
       function bookAddToTable(){
         // Primeiro verifica se a tag <tbody> existe. Adiciona um caso não exista
         if ($("#bookTable tbody").length == 0){
@@ -118,25 +142,7 @@
 
         // Adiciona Livro na Tabela
         $("#bookTable tbody").append(
-          "<tr>" +
-            "<td>" + $("#book_title").val() + "</td>" +
-            "<td>" + $("#book_author").val() + "</td>" +
-            "<td>" + $("#book_publisher").val() + "</td>" +
-            "<td>" +
-              "<button type='button' " +
-                "onclick='bookDisplay(this);' " +
-                "class='btn btn-default'>" +
-                "<span class='glyphicon glyphicon-edit'></span>" +
-              "</button>" +
-            "</td>" +
-            "<td>" +
-              "<button type='button' " +
-                "onclick='bookDelete(this);' " +
-                "class='btn btn-default'>" +
-                "<span class='glyphicon glyphicon-remove'></span>" +
-              "</button>" +
-            "</td>" +
-          "</tr>"
+          bookBuildTableRow()
         );
       }
 
@@ -156,6 +162,20 @@
         $("#updateButton").text("Actualizar");
       }
 
+      function bookUpdateInTable(){
+        // Adiciona a linha modifica na tabela
+        $(_row).after(bookBuildTableRow());
+
+        // Remover a linha antiga
+        $(_row).remove();
+
+        // Limpar o formulário
+        formClear();
+
+        // Mudar o texto do Botão
+        $("#updateButton").text("Adicionar Livro");
+      }
+
       function bookUpdate(){
         if ($("#book_title").val() != null && $("#book_title").val() != ''){
           if ($("#updateButton").text() == "Actualizar"){
@@ -164,7 +184,7 @@
             // Adiciona o Livro na Tabela
             bookAddToTable();
           }
-      
+
           // Limpa o formulário
           formClear();
 
