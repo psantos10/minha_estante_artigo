@@ -46,17 +46,17 @@
               <form>
                 <div class="form-group">
                   <label for="title">Título</label>
-                  <input type="text" name="title" class="form-control input-lg" placeholder="Título do Livro">
+                  <input type="text" name="title" id="book_title" class="form-control input-lg" placeholder="Título do Livro">
                 </div>
 
                 <div class="form-group">
                   <label for="author">Autor</label>
-                  <input type="text" name="author" class="form-control input-lg" placeholder="Nome do Autor">
+                  <input type="text" name="author" id="book_author" class="form-control input-lg" placeholder="Nome do Autor">
                 </div>
 
                 <div class="form-group">
                   <label for="publisher">Editora</label>
-                  <input type="text" name="publisher" class="form-control input-lg" placeholder="Editora">
+                  <input type="text" name="publisher" id="book_publisher" class="form-control input-lg" placeholder="Editora">
                 </div>
 
                 <div class="form-group">
@@ -98,6 +98,19 @@
             "<td>Casa do Código</td>" +
           "</tr>"
         );
+      }
+
+      function bookUpdate(){
+        if ($("#book_title").val() != null && $("#book_title").val() != ''){
+          // Adiciona o Livro na Tabela
+          bookAddToTable();
+
+          // Limpa o formulário
+          formClear();
+
+          // Mantém o focu no campo Título
+          $("#book_title").focus();
+        }
       }
 
       $(document).ready(function(){
