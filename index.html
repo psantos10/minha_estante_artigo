@@ -100,6 +100,22 @@
         );
       }
 
+      function bookAddToTable(){
+        // Primeiro verifica se a tag <tbody> existe. Adiciona um caso não exista
+        if ($("#bookTable tbody").length == 0){
+          $("#bookTable").append("<tbody></tbody>");
+        }
+
+        // Adiciona Livro na Tabela
+        $("#bookTable tbody").append(
+          "<tr>" +
+            "<td>" + $("#book_title").val() + "</td>" +
+            "<td>" + $("#book_author").val() + "</td>" +
+            "<td>" + $("#book_publisher").val() + "</td>" +
+          "</tr>"
+        );
+      }
+
       function bookUpdate(){
         if ($("#book_title").val() != null && $("#book_title").val() != ''){
           // Adiciona o Livro na Tabela
