@@ -76,6 +76,9 @@
     <script src="js/jquery-2.2.2.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
+      // Linha actual que está sendo editada
+      var _row = null;
+
       function formClear(){
         $("#book_title").val("");
         $("#book_author").val("");
@@ -121,6 +124,13 @@
             "<td>" + $("#book_publisher").val() + "</td>" +
             "<td>" +
               "<button type='button' " +
+                "onclick='bookDisplay(this);' " +
+                "class='btn btn-default'>" +
+                "<span class='glyphicon glyphicon-edit'></span>" +
+              "</button>" +
+            "</td>" +
+            "<td>" +
+              "<button type='button' " +
                 "onclick='bookDelete(this);' " +
                 "class='btn btn-default'>" +
                 "<span class='glyphicon glyphicon-remove'></span>" +
@@ -134,11 +144,27 @@
         $(button_delete).parents("tr").remove();
       }
 
+      function bookDisplay(button_edit){
+        _row = $(button_edit).parents("tr");
+        var cols = _row.children("td");
+
+        $("#book_title").val($(cols[0]).text());
+        $("#book_author").val($(cols[1]).text());
+        $("#book_publisher").val($(cols[2]).text());
+
+        // Mudar o texto do Botão
+        $("#updateButton").text("Actualizar");
+      }
+
       function bookUpdate(){
         if ($("#book_title").val() != null && $("#book_title").val() != ''){
-          // Adiciona o Livro na Tabela
-          bookAddToTable();
-
+          if ($("#updateButton").text() == "Actualizar"){
+            bookUpdateInTable();
+          } else {
+            // Adiciona o Livro na Tabela
+            bookAddToTable();
+          }
+      
           // Limpa o formulário
           formClear();
 
