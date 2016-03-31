@@ -34,6 +34,7 @@
                 <th>Título do Livro</th>
                 <th>Autor</th>
                 <th>Editora</th>
+                <th>Eliminar</th>
               </tr>
             </thead>
           </table>
@@ -117,6 +118,13 @@
             "<td>" + $("#book_title").val() + "</td>" +
             "<td>" + $("#book_author").val() + "</td>" +
             "<td>" + $("#book_publisher").val() + "</td>" +
+            "<td>" +
+              "<button type='button' " +
+                "onclick='bookDelete(this);' " +
+                "class='btn btn-default'>" +
+                "<span class='glyphicon glyphicon-remove'></span>" +
+              "</button>" +
+            "</td>" +
           "</tr>"
         );
       }
