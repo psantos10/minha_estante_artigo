@@ -87,31 +87,6 @@
         $("#book_publisher").val("");
       }
 
-      function booksAdd(){
-        // Primeiro verifica se a tag <tbody> existe. Se não, adiciona uma
-        if ($("#bookTable tbody").length == 0){
-          $("#bookTable").append("<tbody></tbody>");
-        }
-
-        // Adiciona um livro na tabela
-        $("#bookTable tbody").append(
-          "<tr>" +
-            "<td>Test-Driven Development - Teste e Design no Mundo Real com .NET</td>" +
-            "<td>Mauricio Aniche</td>" +
-            "<td>Casa do Código</td>" +
-          "</tr>"
-        );
-
-        // Adiciona outro livro na tabela
-        $("#bookTable tbody").append(
-          "<tr>" +
-            "<td>Dominando JavaScript com jQuery</td>" +
-            "<td>Plínio Balduino</td>" +
-            "<td>Casa do Código</td>" +
-          "</tr>"
-        );
-      }
-
       function bookBuildTableRow(id){
         var row = "<tr>" +
           "<td>" + $("#book_title").val() + "</td>" +
@@ -120,7 +95,7 @@
           "<td>" +
             "<button type='button' " +
               "onclick='bookDisplay(this);' " +
-              "class='btn btn-default'>" +
+              "class='btn btn-default'" +
               "data-id='" + id + "'>" +
               "<span class='glyphicon glyphicon-edit'></span>" +
             "</button>" +
@@ -128,7 +103,7 @@
           "<td>" +
             "<button type='button' " +
               "onclick='bookDelete(this);' " +
-              "class='btn btn-default'>" +
+              "class='btn btn-default'" +
               "data-id='" + id + "'>" +
               "<span class='glyphicon glyphicon-remove'></span>" +
             "</button>" +
@@ -145,9 +120,10 @@
         }
 
         // Adiciona Livro na Tabela
-        $("#bookTable tbody").append(
-          bookBuildTableRow()
-        );
+        $("#bookTable tbody").append(bookBuildTableRow(_nextId));
+
+        // Incrementamos o nextId
+        _nextId += 1;
       }
 
       function bookDelete(button_delete){
@@ -156,9 +132,9 @@
 
       function bookDisplay(button_edit){
         var row = $(button_edit).parents("tr");
-        var cols = _row.children("td");
+        var cols = row.children("td");
 
-        _activeId = $($cols[3]).data("id");
+        _activeId = $($(cols[3]).children("button")[0]).data("id");
 
         $("#book_title").val($(cols[0]).text());
         $("#book_author").val($(cols[1]).text());
@@ -168,12 +144,15 @@
         $("#updateButton").text("Actualizar");
       }
 
-      function bookUpdateInTable(){
+      function bookUpdateInTable(id){
+        // Encontra o livro na tabela
+        var row = $("#bookTable button[data-id='" + id + "']").parents("tr")[0];
+
         // Adiciona a linha modifica na tabela
-        $(_row).after(bookBuildTableRow());
+        $(row).after(bookBuildTableRow());
 
         // Remover a linha antiga
-        $(_row).remove();
+        $(row).remove();
 
         // Limpar o formulário
         formClear();
@@ -199,9 +178,6 @@
         }
       }
 
-      $(document).ready(function(){
-        booksAdd();
-      });
     </script>
   </body>
 </html>
