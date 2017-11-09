@@ -149,7 +149,7 @@
         var row = $("#bookTable button[data-id='" + id + "']").parents("tr")[0];
 
         // Adiciona a linha modifica na tabela
-        $(row).after(bookBuildTableRow());
+        $(row).after(bookBuildTableRow(id));
 
         // Remover a linha antiga
         $(row).remove();
