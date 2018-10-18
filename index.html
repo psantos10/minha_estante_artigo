@@ -38,6 +38,7 @@
                     <th>Eliminar</th>
                 </tr>
                 </thead>
+                <tbody></tbody>
             </table>
         </div><!--// .col-md-6 -->
 
@@ -105,30 +106,49 @@
     // ID do livro que está sendo editado
     var _activeId = 0;
 
-    function formClear() {
-        $("#book_title").val("");
-        $("#book_author").val("");
-        $("#book_publisher").val("");
-    }
+    const bookForm = (function($){
+        const BOOK_TITLE = "#book_title";
+        const BOOK_AUTHOR = "#book_author";
+        const BOOK_PUBLISHER = "#book_publisher";
+
+        function clear() {
+            this.setData();
+        }
+
+        function hasErrors() {
+            return $(BOOK_TITLE).val() === null || $(BOOK_TITLE).val() === '';
+        }
+
+        function getData() {
+            return {
+                title: $("#book_title").val(),
+                author: $("#book_author").val(),
+                publisher: $("#book_publisher").val(),
+            };
+        }
+
+        function setData(title='', author='', publisher='') {
+            $(BOOK_TITLE).val(title);
+            $(BOOK_AUTHOR).val(author);
+            $(BOOK_PUBLISHER).val(publisher);
+        }
+
+        return {
+            clear: clear,
+            hasErrors: hasErrors,
+            getData: getData,
+            setData: setData,
+        };
+    })(jQuery);
 
     function bookBuildTableRow(id) {
-        const book = {
-            id: id,
-            title: $("#book_title").val(),
-            author: $("#book_author").val(),
-            publisher: $("#book_publisher").val(),
-        };
+        const book = {id: id, ...bookForm.getData()};
         const bookTpl = _.template($("#bookTemplate").html());
+
         return bookTpl(book);
     }
 
     function bookAddToTable() {
-        // Primeiro verifica se a tag <tbody> existe. Adiciona um caso não exista
-        if ($("#bookTable tbody").length == 0) {
-            $("#bookTable").append("<tbody></tbody>");
-        }
-
-        // Adiciona Livro na Tabela
         $("#bookTable tbody").append(bookBuildTableRow(_nextId));
 
         // Incrementamos o nextId
@@ -145,9 +165,7 @@
 
         _activeId = $($(cols[3]).children("button")[0]).data("id");
 
-        $("#book_title").val($(cols[0]).text());
-        $("#book_author").val($(cols[1]).text());
-        $("#book_publisher").val($(cols[2]).text());
+        bookForm.setData($(cols[0]).text(), $(cols[1]).text(), $(cols[2]).text());
 
         // Mudar o texto do Botão
         $("#updateButton").text("Actualizar");
@@ -163,15 +181,14 @@
         // Remover a linha antiga
         $(row).remove();
 
-        // Limpar o formulário
-        formClear();
+        bookForm.clear();
 
         // Mudar o texto do Botão
         $("#updateButton").text("Adicionar Livro");
     }
 
     function bookUpdate() {
-        if ($("#book_title").val() == null || $("#book_title").val() == '') {
+        if (bookForm.hasErrors()) {
             return;
         }
 
@@ -183,12 +200,11 @@
         }
 
         // Limpa o formulário
-        formClear();
+        bookForm.clear();
 
         // Mantém o focu no campo Título
         $("#book_title").focus();
     }
-
 </script>
 </body>
 </html>
