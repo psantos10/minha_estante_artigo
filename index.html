@@ -171,20 +171,22 @@
     }
 
     function bookUpdate() {
-        if ($("#book_title").val() != null && $("#book_title").val() != '') {
-            if ($("#updateButton").text() == "Actualizar") {
-                bookUpdateInTable(_activeId);
-            } else {
-                // Adiciona o Livro na Tabela
-                bookAddToTable();
-            }
-
-            // Limpa o formulário
-            formClear();
-
-            // Mantém o focu no campo Título
-            $("#book_title").focus();
+        if ($("#book_title").val() == null || $("#book_title").val() == '') {
+            return;
         }
+
+        if ($("#updateButton").text() == "Actualizar") {
+            bookUpdateInTable(_activeId);
+        } else {
+            // Adiciona o Livro na Tabela
+            bookAddToTable();
+        }
+
+        // Limpa o formulário
+        formClear();
+
+        // Mantém o focu no campo Título
+        $("#book_title").focus();
     }
 
 </script>
