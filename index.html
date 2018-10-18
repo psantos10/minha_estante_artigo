@@ -73,8 +73,28 @@
       </div><!--// .row -->
     </div><!--// .container -->
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
     <script src="js/jquery-2.2.2.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+
+    <script type="text/html" id="bookTemplate">
+        <tr>
+            <td><%- title %></td>
+            <td><%- author %></td>
+            <td><%- publisher %></td>
+            <td>
+                <button type='button' onclick='bookDisplay(this);' class='btn btn-default' data-id='<%- id %>'>
+                    <span class='glyphicon glyphicon-edit'></span>
+                </button>
+            </td>
+            <td>
+                <button type='button' onclick='bookDelete(this);' class='btn btn-default' data-id='<%- id %>'>
+                    <span class='glyphicon glyphicon-remove'></span>
+                </button>
+            </td>
+        </tr>
+    </script>
+
     <script type="text/javascript">
       // Próximo ID para adicionar um novo livro
       var _nextId = 1;
@@ -88,29 +108,14 @@
       }
 
       function bookBuildTableRow(id){
-        var row = "<tr>" +
-          "<td>" + $("#book_title").val() + "</td>" +
-          "<td>" + $("#book_author").val() + "</td>" +
-          "<td>" + $("#book_publisher").val() + "</td>" +
-          "<td>" +
-            "<button type='button' " +
-              "onclick='bookDisplay(this);' " +
-              "class='btn btn-default'" +
-              "data-id='" + id + "'>" +
-              "<span class='glyphicon glyphicon-edit'></span>" +
-            "</button>" +
-          "</td>" +
-          "<td>" +
-            "<button type='button' " +
-              "onclick='bookDelete(this);' " +
-              "class='btn btn-default'" +
-              "data-id='" + id + "'>" +
-              "<span class='glyphicon glyphicon-remove'></span>" +
-            "</button>" +
-          "</td>" +
-        "</tr>"
-
-        return row;
+          const book = {
+              id: id,
+              title: $("#book_title").val(),
+              author: $("#book_author").val(),
+              publisher: $("#book_publisher").val(),
+          };
+          const bookTpl = _.template($("#bookTemplate").html());
+          return bookTpl(book);
       }
 
       function bookAddToTable(){
